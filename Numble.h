@@ -1,4 +1,4 @@
-#include <stdlib>
+#include <stdlib.h>
 #include <vector>
 #include <algorithm>
 
@@ -18,10 +18,10 @@ public:
     NumbleWord(const vector<int>& v, const int p): vector<int>(v), pivot(p) {};
     
 public:
-    const int sum() const;
-    const int &pivot() const {return pivot;};
-    void pivot(const int p) {pivot = p;};
-    int * const getPivot();
+    const int Sum() const;
+    const int &Pivot() const {return pivot;};
+    void Pivot(const int p) {pivot = p;};
+    const int * const GetPivot() const;
     vector<int>* const operator-> ();  // monitors mutation of its inherited member
 };
 
