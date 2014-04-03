@@ -38,12 +38,12 @@ vector<int> &NumbleWord::operator* ()
 const vector<int>::iterator NumbleWord::GetPivot() const
 {
     sort();
-    return &*find(begin(), end(), pivot);
+    return find(begin(), end(), pivot);
 }
 
 const NumbleWord makeWord(const NumbleWord &dict, const int n)
 {
-    if (dict.GetPivot() < 0 || n <= 0)
+    if (dict.Pivot() < 0 || n <= 0)
         return dict;
     
     
