@@ -11,11 +11,15 @@ private:
     int pivot;
     mutable int sum;
     
+private:
+    void sort() const;
+    
 public:
-    NumbleWord(): pivot(0), sum(-1) {};
-    NumbleWord(const int n): vector<int>(n), pivot(0), sum(-1) {};
+    NumbleWord(): pivot(-1), sum(-1) {};
+    NumbleWord(const int n): vector<int>(n), pivot(-1), sum(-1) {};
     NumbleWord(const string& s, const int indexOfPivot);
     NumbleWord(const vector<int>& v, const int p): vector<int>(v), pivot(p) {};
+    NumbleWord(const NumbleWord& other): NumbleWord(*other, other.Pivot()) {};
     
 public:
     const int Sum() const;

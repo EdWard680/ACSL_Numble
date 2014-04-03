@@ -23,19 +23,28 @@ const int NumbleWord::Sum() const
     return sum;
 }
 
+void NumbleWord::sort() const
+{
+    sort(begin(),  end(), [](int a, int b) {return a > b;};
+}
+
 vector<int> &NumbleWord::operator* ()
 {
     sum = -1;
-    sort(begin(), end(), [](int a, int b) {return a > b;});
+    sort();
     return *this;
 }
 
-const int * const NumbleWord::GetPivot() const
+const vector<int>::iterator NumbleWord::GetPivot() const
 {
+    sort();
     return &*find(begin(), end(), pivot);
 }
 
 const NumbleWord makeWord(const NumbleWord &dict, const int n)
 {
-    NumbleWord ret;
+    if (dict.GetPivot() < 0 || n <= 0)
+        return dict;
+    
+    
 }
