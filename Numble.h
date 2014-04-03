@@ -22,7 +22,8 @@ public:
     const int &Pivot() const {return pivot;};
     void Pivot(const int p) {pivot = p;};
     const int * const GetPivot() const;
-    vector<int>* const operator-> ();  // monitors mutation of its inherited member
+    vector<int>* const operator-> () {return &operator*();};
+    vector<int> &operator* ();  // monitors mutation of its inherited member
 };
 
 const NumbleWord makeWord(const NumbleWord& dict, const int n=-1);  // creates word of size n from dict

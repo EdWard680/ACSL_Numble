@@ -23,11 +23,11 @@ const int NumbleWord::Sum() const
     return sum;
 }
 
-vector<int> * const NumbleWord::operator-> ()
+vector<int> &NumbleWord::operator* ()
 {
     sum = -1;
     sort(begin(), end(), [](int a, int b) {return a > b;});
-    return this;
+    return *this;
 }
 
 const int * const NumbleWord::GetPivot() const
