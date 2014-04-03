@@ -24,7 +24,7 @@ public:
 public:
     const int Sum() const;
     const int &Pivot() const {return pivot;};
-    void Pivot(const int p) {pivot = p;};
+    void Pivot(const int p);// {pivot = p;};
     const int * const GetPivot() const;
     vector<int>* const operator-> () {return &operator*();};
     vector<int> &operator* ();  // monitors mutation of its inherited member

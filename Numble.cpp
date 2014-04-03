@@ -41,10 +41,26 @@ const vector<int>::iterator NumbleWord::GetPivot() const
     return find(begin(), end(), pivot);
 }
 
-const NumbleWord makeWord(const NumbleWord &dict, const int n)
+void NumbleWord::Pivot(const int p)
+{
+    pivot = p;
+    if(GetPivot() == end())
+    {
+        push_back(pivot);
+    }
+}
+
+const NumbleWord getSizedWord(const NumbleWord &dict, const int n)
 {
     if (dict.Pivot() < 0 || n <= 0)
         return dict;
     
-    
+    NumbleWord ret(dict);
+    for(int i = 0; i < dict.size()-n; i++)
+        ret->pop_back();
+}
+
+const NumbleWord makeWord(const NumbleWord &dict, const int n)
+{
+    NumbleWord ret = getSizedWord(dict, n);
 }
