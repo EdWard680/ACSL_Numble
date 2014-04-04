@@ -1,6 +1,6 @@
 #include "Numble.h"
 
-NumbleWord::NumbleWord(const string &s, const int indexOfPivot): vector<int>(s.size())  // error checking left to callers
+NumbleWord::NumbleWord(const string &s, const int p): vector<int>(s.size())  // error checking left to callers
 {
     for(auto c = s.begin(); c != s.end(); c++) // omg c++
     {
@@ -8,7 +8,16 @@ NumbleWord::NumbleWord(const string &s, const int indexOfPivot): vector<int>(s.s
           push_back(int(*c-'0'));
     }
     
-    pivot = (*this)[indexOfPivot];
+    Pivot(p);
+}
+
+NumbleWord& NumbleWord::operator= (const NumbleWord& other)
+{
+	if(this == &other)
+		return *this;
+	
+	**this = *other;
+	Pivot(other.Pivot());
 }
 
 const int NumbleWord::Sum() const
@@ -56,11 +65,34 @@ const NumbleWord getSizedWord(const NumbleWord &dict, const int n)
         return dict;
     
     NumbleWord ret(dict);
-    for(int i = 0; i < dict.size()-n; i++)
+    while(ret.size() > dict.size()-n-(ret.GetPivot() == ret->end()? 1:0)
+	{
         ret->pop_back();
+	}
+	
+	if(ret.GetPivot() == ret->end()) // maintains the pivot if necessary
+		ret.Pivot(ret.Pivot());
 }
 
+/*
 const NumbleWord makeWord(const NumbleWord &dict, const int n)
 {
     NumbleWord ret = getSizedWord(dict, n);
+}
+*/
+
+ostream& operator<< (ostream& out, const NumbleWord& nw)
+{
+	for(auto i = nw->begin(); i != nw->end(); i++)
+	{
+		out<<*i;
+	}
+	return out;
+}
+
+istream& operator>> (istream& in, NumbleWord& nw)
+{
+	string tmp;
+	in>>tmp;
+	nw = tmp;
 }
