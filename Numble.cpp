@@ -34,5 +34,5 @@ int * const NumbleWord::getPivot()
 
 const NumbleWord makeWord(const NumbleWord &dict, const int n)
 {
-	NumbleWord ret;
+	NumbleWord ret(;
 }
