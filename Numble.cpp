@@ -1,14 +1,29 @@
 #include "Numble.h"
 
-NumbleWord::NumbleWord(const string &s, const int p): vector<int>(s.size())  // error checking left to callers
+NumbleWord::NumbleWord(const string &s, const int p)  // error checking left to callers
 {
+	reserve(s.size());
+	bool zero = false;
     for(auto c = s.begin(); c != s.end(); c++) // omg c++
     {
-      if(*c >= '0' && *c <= '9')
-          push_back(int(*c-'0'));
+		if(*c >= '0' && *c <= '9')
+		{
+			if(*c == '0')
+			{
+				if(!zero)
+					zero = true;
+				else
+					continue;
+			}
+			push_back(int(*c-'0'));
+		}
+		sum += back();
     }
-    
-    Pivot(p);
+	
+	if(p < 0 && size() > 0)
+		Pivot(at(0));
+	else
+		Pivot(p);
 }
 
 NumbleWord& NumbleWord::operator= (const NumbleWord& other)
@@ -32,9 +47,10 @@ const int NumbleWord::Sum() const
     return sum;
 }
 
-void NumbleWord::sort() const
+void NumbleWord::sort() //const
 {
-    sort(begin(),  end(), [](int a, int b) {return a > b;};
+	using std::sort;
+    sort(begin(), end(), [](int a, int b) {return bool(a > b);});
 }
 
 vector<int> &NumbleWord::operator* ()
@@ -44,7 +60,7 @@ vector<int> &NumbleWord::operator* ()
     return *this;
 }
 
-const vector<int>::iterator NumbleWord::GetPivot() const
+vector<int>::const_iterator NumbleWord::GetPivot()
 {
     sort();
     return find(begin(), end(), pivot);
@@ -52,7 +68,8 @@ const vector<int>::iterator NumbleWord::GetPivot() const
 
 void NumbleWord::Pivot(const int p)
 {
-    pivot = p;
+    if((pivot = p) < 0)
+		return;
     if(GetPivot() == end())
     {
         push_back(pivot);
@@ -65,25 +82,29 @@ const NumbleWord getSizedWord(const NumbleWord &dict, const int n)
         return dict;
     
     NumbleWord ret(dict);
-    while(ret.size() > dict.size()-n-(ret.GetPivot() == ret->end()? 1:0)
+    while(ret->size() > n-(ret.GetPivot() == ret->end() && ret.Pivot() >= 0))
 	{
         ret->pop_back();
 	}
 	
 	if(ret.GetPivot() == ret->end()) // maintains the pivot if necessary
 		ret.Pivot(ret.Pivot());
+		
+	return ret;
 }
 
-/*
 const NumbleWord makeWord(const NumbleWord &dict, const int n)
 {
     NumbleWord ret = getSizedWord(dict, n);
+	if(ret.Sum() % 5 == 0)
+	{
+		return ret;
+	}
 }
-*/
 
 ostream& operator<< (ostream& out, const NumbleWord& nw)
 {
-	for(auto i = nw->begin(); i != nw->end(); i++)
+	for(auto i = nw->cbegin(); i != nw->cend(); i++)
 	{
 		out<<*i;
 	}
