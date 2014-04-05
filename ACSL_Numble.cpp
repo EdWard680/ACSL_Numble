@@ -40,6 +40,8 @@ int main(int argc, char **argv)
 	while(!cin.eof())
 	{
 		cin.getline(hBuf, 15, ',').getline(vBuf, 15, ',').getline(pBuf, 15);
+		if(cin.eof())
+			break;
 		rawHoriz.Pivot(atoi(pBuf));
 		rawVert.Pivot(rawHoriz.Pivot());
 		WordFinder horiz(rawHoriz, atoi(hBuf));
