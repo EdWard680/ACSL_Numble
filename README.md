@@ -1,19 +1,19 @@
 ACSL_Numble
 ===========
 
-==Use==
+### Use
 
 Call with
-```
-ACSL_Numble <horizontal tiles> <vertical tiles>
+```Shell
+$ ACSL_Numble <horizontal tiles> <vertical tiles>
 	<horizontal length>, <vertical length>, <shared tile>
 	...
 	<EOF>[^Z\n]
 ```
 
 or set those with the first line of input
-```
-ACSL_Numble
+```Shell
+$ ACSL_Numble
 	<horizontal tiles>, <vertical tiles>
 	<horizontal length>, <vertical length>, <shared tile>
 	...
