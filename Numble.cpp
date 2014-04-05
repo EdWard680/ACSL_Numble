@@ -41,7 +41,7 @@ const int NumbleWord::Sum() const
         return sum;
     else
         sum = 0;
-        
+	
     for(auto i = begin(); i != end(); i++)
         sum += *i;
     return sum;
@@ -91,33 +91,6 @@ const NumbleWord getSizedWord(const NumbleWord &dict, const int n)
         ret.Pivot(ret.Pivot());
         
     return ret;
-}
-
-const NumbleWord bruteForce(const NumbleWord &word, const NumbleWord &dict)  // quick code, long run time, aka fallback
-{
-    NumbleWord swaps;
-    for(auto i = dict->cbegin()+(word->cend()-word->cbegin()); i != dict->cend(); i++)
-    {
-        swaps.push_back(*i);
-    }
-    
-    int max = 0;
-    const int best = (word.Sum()/5)*5;
-    for(auto i = word.back(); i != word.begin(); i--)
-    {
-        for(auto j = word.begin(); j != word.end(); j++)
-    }
-    
-}
-
-
-const NumbleWord makeWord(const NumbleWord &dict, const int n)
-{
-    NumbleWord ret = getSizedWord(dict, n);
-    if(ret.Sum() % 5 == 0)
-    {
-        return ret;
-    }
 }
 
 ostream& operator<< (ostream& out, const NumbleWord& nw)

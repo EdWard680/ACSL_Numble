@@ -6,7 +6,7 @@
 #include <algorithm>
 #include <iostream>
 
-#define DEBUG_NUMBLE
+//#define DEBUG_NUMBLE
 
 using namespace std;
 
@@ -22,14 +22,15 @@ private:
     
 public:
     NumbleWord(): pivot(-1), sum(-1) {};
-    NumbleWord(const int n): vector<int>(n), pivot(-1), sum(-1) {};
+    //NumbleWord(const int n): vector<int>(n), pivot(-1), sum(-1) {};
     NumbleWord(const string& s, const int p=-1);
-    NumbleWord(const vector<int>& v, const int p=-1): vector<int>(v), pivot(p) {};
+    NumbleWord(const vector<int>& v, const int p=-1): vector<int>(v), pivot(p), sum(-1) {};
     NumbleWord(const NumbleWord& other): NumbleWord(*other, other.Pivot()) {};
 	NumbleWord& operator= (const NumbleWord& other);
     
 public:
     const int Sum() const;
+	const int Sum() {**this; return const_cast<const NumbleWord *>(this)->Sum();};
     const int &Pivot() const {return pivot;};
     void Pivot(const int p);// {pivot = p;};
     vector<int>::const_iterator GetPivot();
