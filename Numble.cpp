@@ -16,8 +16,8 @@ NumbleWord::NumbleWord(const string &s, const int p)  // error checking left to 
                     continue;
             }
             push_back(int(*c-'0'));
+			sum += back();
         }
-        sum += back();
     }
     
     if(p < 0 && size() > 0)
