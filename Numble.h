@@ -37,6 +37,7 @@ public:
 	vector<int>::const_iterator GetPivot() const {return find(cbegin(), cend(), pivot);};
     vector<int>* const operator-> () {return &operator*();};
 	const vector<int> * const operator-> () const {return this;};
+private:
     vector<int> &operator* ();  // monitors mutation of its inherited member
 	const vector<int> &operator* () const {return *this;};
 };
